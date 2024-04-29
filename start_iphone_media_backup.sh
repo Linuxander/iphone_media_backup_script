@@ -1,11 +1,15 @@
 #!/bin/bash
 
-TODAYS_DATE=$(date +%Y-%m-%d_%H-%M-%S)
+echo "Who's phone are you backing up?"
+read PHONE_OWNER
+
+TODAYS_DATE=$(date +%Y-%m-%d)
 DIR=$(dirname "${BASH_SOURCE[0]}")
 MP_FOLDER=iphone_mount_point
 MP_PATH=$DIR/$MP_FOLDER
-DEST_FOLDER="${TODAYS_DATE}_local_copy"
+DEST_FOLDER="${TODAYS_DATE}_${PHONE_OWNER}_iPhone_Backup"
 DEST_PATH=$DIR/$DEST_FOLDER
+
 
 echo "Installing ifuse and libimobiledevice-utils..." 
 sudo apt-get install libimobiledevice-utils ifuse -y
@@ -22,7 +26,7 @@ sleep 1
 echo "When you verify it is connected to your computer, press enter to allow this script to continue."
 read waitforusertohitenter
 
-echo "Mounting iphone to ${MP_PATH}"
+echo "Mounting iPhone to ${MP_PATH}"
 ifuse $MP_PATH
 
 sleep 3
@@ -37,4 +41,16 @@ echo "Copy complete."
 
 sleep 3
 
-echo "You may eject the connected iphone using your file explorer window."
+echo "Unounting iPhone from ${MP_PATH}"
+sudo fusermount -u ${MP_PATH}
+echo "iPhone unmounted, you may disconnect your phone..."
+
+sleep 3
+
+echo "Zipping up local media folder..."
+zip -r "${DEST_FOLDER}.zip" $DEST_PATH
+
+sleep 3
+
+echo "Script complete..."
+
