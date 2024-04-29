@@ -17,6 +17,6 @@ This repository is a bash script that copies the photo's and videos from your iP
 3. Creates a folder to mount your iphone to
 4. Asks you to connect your iphone to the computer using a USB cable (hit ENTER once you've connected it)
 5. Mounts your iPhone to the mount folder it created
-6. Uses rsync to copy your photo's and videos from your phone to the destination folder
+6. Uses `rsync` to copy your photo's and videos from your phone to the destination folder
 7. When complete, it unmounts your phone for you (you can unplug your phone after this runs)
 8. Zips the destination folder for you so you can transfer it elsewhere later
