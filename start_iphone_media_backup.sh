@@ -42,7 +42,7 @@ echo "Copy complete."
 sleep 3
 
 echo "Unounting iPhone from ${MP_PATH}"
-sudo fusermount -u ${MP_PATH}
+fusermount -u ${MP_PATH}
 echo "iPhone unmounted, you may disconnect your phone..."
 
 sleep 3
